@@ -1,9 +1,20 @@
-# mkdocs-plugin-template
-
+# Overview
 This is a template for a MkDocs plugin.
 
-## Setup
+# Versions of python & mkdocs
+I have confirmed that it works in the following environment.
 
+||version|
+|-|-|
+|python|3.6 - 3.9|
+|mkdocs|1.1|
+
+If you want to create a plugin for another mkdocs version, checkout the corresponding tag.  
+
+# How to use
+TODO: explain how to rename..
+
+## Setup
 Install the plugin using pip:
 
 `pip install mkdocs-your-plugin-name`
@@ -20,17 +31,11 @@ plugins:
 More information about plugins in the [MkDocs documentation][mkdocs-plugins].
 
 ## Config
-
 * `param` - This does something
-
-## Usage
 
 ## See Also
 
-More information about templates [here][mkdocs-template].
-
-More information about blocks [here][mkdocs-block].
-
-[mkdocs-plugins]: http://www.mkdocs.org/user-guide/plugins/
-[mkdocs-template]: https://www.mkdocs.org/user-guide/custom-themes/#template-variables
-[mkdocs-block]: https://www.mkdocs.org/user-guide/styling-your-docs/#overriding-template-blocks
+- [plugins.md](https://github.com/mkdocs/mkdocs/blob/eddeeab066cb071dbe426878a85de715df1b93e7/docs/user-guide/plugins.md)  
+   This is user-guide for plusings.
+- [plugins.py](https://github.com/mkdocs/mkdocs/blob/eddeeab066cb071dbe426878a85de715df1b93e7/mkdocs/plugins.py)  
+   Mkdocs defines the events for plugins in this file.

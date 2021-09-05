@@ -1,11 +1,14 @@
-import os
 import sys
-from timeit import default_timer as timer
-from datetime import datetime, timedelta
 
-from mkdocs import utils as mkdocs_utils
-from mkdocs.config import config_options, Config
 from mkdocs.plugins import BasePlugin
+from mkdocs.config import config_options, Config
+from mkdocs.structure.files import File, Files
+from mkdocs.structure.nav import Navigation, Page
+
+from jinja2.environment import Template
+from jinja2 import Environment
+from livereload import Server
+
 
 class YourPlugin(BasePlugin):
 
@@ -14,54 +17,55 @@ class YourPlugin(BasePlugin):
     )
 
     def __init__(self):
-        self.enabled = True
-        self.total_time = 0
+        pass
 
-    def on_serve(self, server):
+    # Global Events
+    def on_serve(self, server: Server, config: Config) -> Server:
         return server
 
-    def on_pre_build(self, config):
-        return
-
-    def on_files(self, files, config):
-        return files
-
-    def on_nav(self, nav, config, files):
-        return nav
-
-    def on_env(self, env, config, files):
-        return env
-    
-    def on_config(self, config):
+    def on_config(self, config: Config) -> Config:
         return config
 
-    def on_post_build(self, config):
+    def on_pre_build(self, config: Config) -> None:
         return
 
-    def on_pre_template(self, template, template_name, config):
+    def on_files(self, files: Files, config: Config) -> Files:
+        return files
+
+    def on_nav(self, nav: Navigation, config: Config, files: Files) -> Navigation:
+        return nav
+
+    def on_env(self, env: Environment, config: Config, files: Files) -> Environment:
+        return env
+
+    def on_post_build(self, config: Config) -> None:
+        return
+
+    # Template Events
+    def on_pre_template(self, template: Template, template_name: str, config: Config) -> Template:
         return template
 
-    def on_template_context(self, context, template_name, config):
+    def on_template_context(self, context: dict, template_name: str, config: Config) -> dict:
         return context
-    
-    def on_post_template(self, output_content, template_name, config):
+
+    def on_post_template(self, output_content: str, template_name: str, config: Config) -> str:
         return output_content
-    
-    def on_pre_page(self, page, config, files):
+
+    # Page Events
+    def on_pre_page(self, page: Page, config: Config, files: Files) -> Page:
         return page
 
-    def on_page_read_source(self, page, config):
+    def on_page_read_source(self, page: Page, config: Config) -> str:
         return ""
 
-    def on_page_markdown(self, markdown, page, config, files):
+    def on_page_markdown(self, markdown: str, page: Page, config: Config, files: Files) -> str:
         return markdown
 
-    def on_page_content(self, html, page, config, files):
+    def on_page_content(self, html: str, page: Page, config: Config, files: Files) -> str:
         return html
 
-    def on_page_context(self, context, page, config, nav):
+    def on_page_context(self, context: dict, page: Page, config: Config, nav: Navigation) -> dict:
         return context
 
-    def on_post_page(self, output_content, page, config):
+    def on_post_page(self, output_content: str, page: Page, config: Config) -> str:
         return output_content
-
