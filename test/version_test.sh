@@ -7,7 +7,14 @@ VERSION_LIST=(
 3.9.7
 )
 
+TEST_PLUGIN_NAME=test-plugin
+TEST_PLUGIN_CLASS_NAME=TestPluginClass
+
 function test_version () {
+  bash generate_template.sh $TEST_PLUGIN_NAME $TEST_PLUGIN_CLASS_NAME
+  cp test/mypy.ini $TEST_PLUGIN_NAME
+  pushd $TEST_PLUGIN_NAME
+
   local version=$1
   echo /_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
   echo start test for $version version
@@ -31,7 +38,7 @@ function test_version () {
   echo Test
   echo -----------------------------------------------
   # type check
-  pyenv exec mypy mkdocs_your_plugin/plugin.py
+  pyenv exec mypy ${TEST_PLUGIN_NAME//-/_}/plugin.py
 
   # build $ serve test
   pushd testdoc > /dev/null
@@ -49,6 +56,8 @@ function test_version () {
 
   echo 
   echo 
+  popd 
+  rm -rf $TEST_PLUGIN_NAME
 }
 
 
